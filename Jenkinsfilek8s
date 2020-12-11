@@ -102,7 +102,7 @@ pipeline {
 					execute("cd bundles && chmod 755 ./portal-client-cli-linux")
 						
 					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-portal-client-launcher.git")
-					execute("cd tool-portal-client-launcher && git checkout develop")
+					execute("cd tool-portal-client-launcher && git checkout feature/switch-portal-server")
 					execute("cd tool-portal-client-launcher && node portalLauncher.js -app=../bundles/portal-client-cli-linux - -srv=\"staging\" -cmd=\"uploadGitHub ${cmdArgs}\"")
 				}
 			}

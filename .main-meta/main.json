@@ -4,7 +4,7 @@
   "content": {
     "metaDataVersion": "1.0.0",
     "name": "com.microchip.mcu8.mplabx.project.test-portal-deployment",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "displayName": "Portal Deployment",
     "projectName": "test-portal-deployment",
     "shortDescription": "Hello Portal",
