@@ -114,9 +114,6 @@ pipeline {
 				sendPipelineFailureEmail()
             }
         }
-        always {
-            archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
-        }
     }
 }
 
