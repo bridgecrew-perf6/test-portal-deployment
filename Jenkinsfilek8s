@@ -16,7 +16,7 @@ pipeline {
 	environment {	
 		GITHUB_URL ='https://github.com/mchpTestArea/test-portal-deployment.git'
 		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/test-portal-deployment.git'
-		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/~i15784/tool-github-deploy.git'
+		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/citd/tool-github-deploy.git'
 		DEPLOY_SCRIPT_DIR = 'tool-github-deploy'
 		DEPLOY_SCRIPT_FILE = 'deploy-source-as-is.sh'
 		SEMVER_REGEX = '^(0|[1-9]\\d*)+\\.(0|[1-9]\\d*)+\\.(0|[1-9]\\d*)+$'
@@ -72,7 +72,7 @@ pipeline {
 			steps {
 				script {
 					execute("git clone ${env.DEPLOY_TOOL_URL}")		
-					execute("cd ${env.DEPLOY_SCRIPT_DIR} && git checkout feature/tag-check")
+					
 					withCredentials([usernamePassword(credentialsId: 'BD1085_GitHub_Token', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
 						execute("cd ${env.DEPLOY_SCRIPT_DIR} && bash ${env.DEPLOY_SCRIPT_FILE} ${env.BITBUCKET_URL} ${env.GITHUB_URL} ${USER_NAME} ${USER_PASS} '--tag ${env.TAG_NAME}'")	
 					}	
@@ -101,8 +101,7 @@ pipeline {
 					execute("git clone https://bitbucket.microchip.com/scm/portal/bundles.git")
 					execute("cd bundles && chmod 755 ./portal-client-cli-linux")
 						
-					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-portal-client-launcher.git")
-					execute("cd tool-portal-client-launcher && git checkout feature/switch-portal-server")
+					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-portal-client-launcher.git")					
 					execute("cd tool-portal-client-launcher && node portalLauncher.js -app=../bundles/portal-client-cli-linux - -srv=\"staging\" -cmd=\"uploadGitHub ${cmdArgs}\"")
 				}
 			}
